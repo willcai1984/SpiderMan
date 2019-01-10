@@ -18,19 +18,32 @@ NEWSPIDER_MODULE = 'spiderman_bot.spiders'
 # USER_AGENT = 'spiderman_bot (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
-import os
+# import os
+# import sys
+#
+# from django.core.wsgi import get_wsgi_application
+#
+# DJANGO_PROJECT_PATH = '../../spiderman_project/backend'
+# DJANGO_SETTINGS_MODULE = 'backend.settings'
+#
+# sys.path.insert(0, DJANGO_PROJECT_PATH)
+# os.environ['DJANGO_SETTINGS_MODULE'] = DJANGO_SETTINGS_MODULE
+# application = get_wsgi_application()
+#
 import sys
+import os
+import django
 
-from django.core.wsgi import get_wsgi_application
+SPIDER_BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+PROJECT_ROOT_DIR = os.path.dirname(SPIDER_BASE_DIR)  # 两个项目共同的根目录
+SITE_BASE_DIR = os.path.join(PROJECT_ROOT_DIR, 'spiderman_project')
 
-DJANGO_PROJECT_PATH = '../../spiderman_project/backend'
-DJANGO_SETTINGS_MODULE = 'backend.settings'
-
-sys.path.insert(0, DJANGO_PROJECT_PATH)
-os.environ['DJANGO_SETTINGS_MODULE'] = DJANGO_SETTINGS_MODULE
-application = get_wsgi_application()
+sys.path.append(os.path.join(SPIDER_BASE_DIR, 'spiderman_bot'))  # 爬虫根目录
+sys.path.append(os.path.join(SITE_BASE_DIR, 'backend'))  # django根目录
+os.environ['DJANGO_SETTINGS_MODULE'] = 'backend.settings'
+django.setup()
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -75,9 +88,9 @@ application = get_wsgi_application()
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'spiderman_bot.pipelines.SpidermanBotPipeline': 300,
-# }
+ITEM_PIPELINES = {
+    'spiderman_bot.pipelines.SpidermanBotPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -7,8 +7,10 @@
 
 import scrapy
 
+# from .util import DjangoItemPlus
+from scrapy_djangoitem import DjangoItem
+from bank.models import Tender
 
-class SpidermanBotItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+
+class TenderItem(DjangoItem):
+    django_model = Tender

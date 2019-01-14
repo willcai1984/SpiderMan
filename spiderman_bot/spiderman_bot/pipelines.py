@@ -14,7 +14,7 @@ class SpidermanBotPipeline(object):
         super(SpidermanBotPipeline, self).__init__(*args, **kwargs)
         # notice_id+source_site形成唯一主键
         self.id_set = set()
-        for tender_tuple in Tender.objects.all().values_list('notice_id', 'source_site'):
+        for tender_tuple in Tender.objects.filter(is_delete=0).values_list('notice_id', 'source_site'):
             self.id_set.add(''.join(tender_tuple))
 
     def process_item(self, item, spider):

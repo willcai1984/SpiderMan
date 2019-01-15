@@ -32,14 +32,17 @@ class EmailtestSpider(scrapy.Spider):
         for tender in tenders_not_notice:
             title = tender.title
             content_tuple_list.append((tender.location, tender.source_site, tender.title, tender.pub_date, tender.url))
-        receivers = []
-        for mail in Mail.objects.filter(is_delete=0):
-            receivers.append(mail.receive_mail)
-        e = EmailSend()
-        subject = "更新%s等%s条招标信息" % (title, len(content_tuple_list))
-        r = e.email_send(receivers, subject, content_tuple_list)
-        if r:
-            logger.info("发送邮件成功，并更新数据库")
-            tenders_not_notice.update(is_notice=1)
+        if len(content_tuple_list):
+            receivers = []
+            for mail in Mail.objects.filter(is_delete=0):
+                receivers.append(mail.receive_mail)
+            e = EmailSend()
+            subject = "更新%s等%s条招标信息" % (title, len(content_tuple_list))
+            r = e.email_send(receivers, subject, content_tuple_list)
+            if r:
+                logger.info("发送邮件成功，并更新数据库")
+                tenders_not_notice.update(is_notice=1)
+            else:
+                logger.info("发送邮件失败")
         else:
-            logger.info("发送邮件失败")
+            logger.info("无新邮件信息更新不发送邮件")

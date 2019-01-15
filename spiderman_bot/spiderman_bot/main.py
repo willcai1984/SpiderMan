@@ -7,7 +7,7 @@ import sys
 import os
 
 # from scrapy.cmdline import execute
-
+# 要增加上一级的路径，获取scrapy.cfg才能使用scrapy cmdline
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # execute方法中的最后一句代码是sys.exit(cmd.exitcode)，所以当程序执行完一个execute语句后便停止了。
 # https://stackoverflow.com/questions/24875280/scrapy-cmdline-execute-stops-script

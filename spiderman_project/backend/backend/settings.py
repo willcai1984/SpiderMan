@@ -124,8 +124,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 BASE_LOG_DIR = os.path.join(BASE_DIR) if os.name == 'nt' else "/var/log/py/"
-LOG_NORMAL_FILE = "yiqian_stdout.log"
-LOG_ERR_FILE = "yiqian_stderr.log"
+LOG_NORMAL_FILE = "spiderman_stdout.log"
+LOG_ERR_FILE = "spiderman_stderr.log"
 LOGGING = {
     'version': 1,  # 保留字
     'disable_existing_loggers': False,  # 禁用已经存在的logger实例

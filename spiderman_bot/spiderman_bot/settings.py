@@ -9,34 +9,20 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
+import django
+import os
+import sys
+
 BOT_NAME = 'spiderman_bot'
 
 SPIDER_MODULES = ['spiderman_bot.spiders']
 NEWSPIDER_MODULE = 'spiderman_bot.spiders'
-
-LOG_LEVEL = "INFO"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'spiderman_bot (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
-
-# import os
-# import sys
-#
-# from django.core.wsgi import get_wsgi_application
-#
-# DJANGO_PROJECT_PATH = '../../spiderman_project/backend'
-# DJANGO_SETTINGS_MODULE = 'backend.settings'
-#
-# sys.path.insert(0, DJANGO_PROJECT_PATH)
-# os.environ['DJANGO_SETTINGS_MODULE'] = DJANGO_SETTINGS_MODULE
-# application = get_wsgi_application()
-#
-import sys
-import os
-import django
 
 SPIDER_BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 PROJECT_ROOT_DIR = os.path.dirname(SPIDER_BASE_DIR)  # 两个项目共同的根目录
